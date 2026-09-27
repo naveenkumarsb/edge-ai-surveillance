@@ -13,6 +13,7 @@ class EventDetector:
             class_id = obj["class_id"]
             object_id = obj["id"]
             bbox = obj["bbox"]
+            confidence = obj["confidence"]
 
             if class_id not in self.restricted_classes:
                 continue
@@ -25,8 +26,6 @@ class EventDetector:
             if inside_zone:
                 current_intrusions.add(object_id)
 
-                # Generate an event only when the object
-                # enters the zone for the first time.
                 if object_id not in self.active_intrusions:
                     events.add(
                         (
@@ -34,10 +33,10 @@ class EventDetector:
                             object_id,
                             class_id,
                             zone.name,
+                            confidence,
                         )
                     )
 
-        # Update active objects.
         self.active_intrusions = current_intrusions
 
         return [
@@ -46,6 +45,13 @@ class EventDetector:
                 "object_id": object_id,
                 "class_id": class_id,
                 "zone": zone_name,
+                "confidence": confidence,
             }
-            for event_type, object_id, class_id, zone_name in events
+            for (
+                event_type,
+                object_id,
+                class_id,
+                zone_name,
+                confidence,
+            ) in events
         ]

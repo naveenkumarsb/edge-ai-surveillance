@@ -1,20 +1,44 @@
 class RiskEngine:
     """
-    Simple rule-based risk assessment engine.
+    Rule-based risk assessment engine.
 
-    This is a prototype. The scoring model should be
-    validated using appropriate test data before deployment.
+    This prototype converts contextual event features
+    into a configurable risk score.
     """
+
+    def __init__(
+        self,
+        intrusion_score=50,
+        restricted_zone_score=25,
+    ):
+        self.intrusion_score = intrusion_score
+        self.restricted_zone_score = restricted_zone_score
 
     def evaluate(self, event):
         score = 0
+        reasons = []
 
-        if event["event_type"] == "ZONE_INTRUSION":
-            score += 50
+        # 1. Zone intrusion
+        if event.get("event_type") == "ZONE_INTRUSION":
+            score += self.intrusion_score
+            reasons.append("Restricted-zone intrusion")
 
+        # 2. Restricted zone
         if event.get("zone") == "Restricted Zone":
-            score += 25
+            score += self.restricted_zone_score
+            reasons.append("Restricted security zone")
 
+        # 3. Detection confidence
+        confidence = event.get("confidence", 0.0)
+
+        if confidence >= 0.8:
+            score += 10
+            reasons.append("High detection confidence")
+
+        # Limit score to 100
+        score = min(score, 100)
+
+        # Determine risk category
         if score >= 75:
             level = "HIGH"
         elif score >= 50:
@@ -26,4 +50,5 @@ class RiskEngine:
             **event,
             "risk_score": score,
             "risk_level": level,
+            "risk_reasons": reasons,
         }

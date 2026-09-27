@@ -74,10 +74,18 @@ def main():
             event_logger.log(risk_event)
 
             # Display event in terminal
-            print(
-                f"[EVENT] {risk_event['event_type']} | "
-                f"Risk: {risk_event['risk_level']} | "
-                f"Score: {risk_event['risk_score']}"
+           print("\n========== SECURITY EVENT ==========")
+print(f"Event      : {risk_event['event_type']}")
+print(f"Object ID  : {risk_event['object_id']}")
+print(f"Zone       : {risk_event['zone']}")
+print(f"Confidence : {risk_event['confidence']:.2f}")
+print(f"Risk Score : {risk_event['risk_score']}")
+print(f"Risk Level : {risk_event['risk_level']}")
+print(
+    "Reasons    : "
+    + ", ".join(risk_event["risk_reasons"])
+)
+print("====================================\n")
             )
 
         # Draw detection results
