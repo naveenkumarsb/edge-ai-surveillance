@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+
+# Logs
+*.log
+
+# Environment / secrets
+.env
+.env.*
+
+# AI model files
+*.pt
+*.pth
+*.onnx
+*.h5
+
+# Large datasets
+data/
+datasets/
+
+# Temporary files
+*.tmp
