@@ -1,10 +1,12 @@
 import cv2
 
 from detection.detector import ObjectDetector
+from tracking.tracker import ObjectTracker
 
 
 def main():
     detector = ObjectDetector()
+    tracker = ObjectTracker()
 
     camera = cv2.VideoCapture(0)
 
@@ -12,7 +14,7 @@ def main():
         print("ERROR: Could not open camera.")
         return
 
-    print("Edge-AI surveillance started.")
+    print("Edge-AI surveillance with object tracking started.")
     print("Press 'q' to exit.")
 
     while True:
@@ -22,12 +24,14 @@ def main():
             print("ERROR: Could not read camera frame.")
             break
 
-        results = detector.detect(frame)
+        results = detector.track(frame)
+
+        objects = tracker.process(results)
 
         annotated_frame = results[0].plot()
 
         cv2.imshow(
-            "Edge-AI Surveillance",
+            "Edge-AI Surveillance - Tracking",
             annotated_frame
         )
 
