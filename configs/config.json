@@ -1,0 +1,25 @@
+{
+    "camera": {
+        "device": 0,
+        "width": 1280,
+        "height": 720
+    },
+
+    "detection": {
+        "model": "yolo11n.pt",
+        "confidence": 0.5
+    },
+
+    "security_zone": {
+        "name": "Restricted Zone",
+        "x1": 200,
+        "y1": 100,
+        "x2": 600,
+        "y2": 450
+    },
+
+    "risk": {
+        "intrusion_score": 50,
+        "restricted_zone_score": 25
+    }
+}

@@ -42,3 +42,22 @@ datasets/
 
 # Temporary files
 *.tmp
+.venv/
+__pycache__/
+*.pyc
+.vscode/
+.ipynb_checkpoints/
+
+.env
+.env.*
+
+*.pt
+*.pth
+*.onnx
+*.h5
+
+events.jsonl
+*.log
+
+data/
+datasets/
