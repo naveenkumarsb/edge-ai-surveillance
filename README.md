@@ -1,89 +1,100 @@
 # 🛡️ Intelligent Secure Edge-AI Surveillance & Perimeter Security
 
-> **Privacy-preserving, real-time surveillance using Edge AI, computer vision, risk prediction, and cybersecurity monitoring.**
+> **A modular Edge-AI security platform for real-time visual monitoring, object tracking, restricted-zone detection, risk analysis, cybersecurity monitoring, and event-driven alerting.**
+>
+> The system is designed to process surveillance data locally where practical, converting camera activity into structured security events while providing a foundation for future edge deployment, analytics, and security operations.
 
-[![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python)](https://www.python.org/)
-[![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green?logo=opencv)](https://opencv.org/)
-[![Edge AI](https://img.shields.io/badge/Edge-AI-orange)]()
-[![Computer Vision](https://img.shields.io/badge/Computer-Vision-purple)]()
-[![Cybersecurity](https://img.shields.io/badge/Cybersecurity-Monitoring-red)]()
-[![Status](https://img.shields.io/badge/Status-In%20Development-yellow)]()
-[![License](https://img.shields.io/badge/License-MIT-green)]()
+<p align="center">
 
----
+![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
+![YOLO](https://img.shields.io/badge/YOLO-Object%20Detection-111111?style=for-the-badge)
+![Edge AI](https://img.shields.io/badge/Edge%20AI-Local%20Inference-FF6F00?style=for-the-badge)
+![Cybersecurity](https://img.shields.io/badge/Cybersecurity-Monitoring-D32F2F?style=for-the-badge)
+![Git](https://img.shields.io/badge/Git-Version%20Control-F05032?style=for-the-badge&logo=git&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-2EA44F?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-In%20Development-F0AD4E?style=for-the-badge)
 
-## 📌 Overview
-
-The **Intelligent Secure Edge-AI Surveillance & Perimeter Security System** is an edge-based security platform designed to perform real-time visual analysis locally.
-
-Instead of continuously sending camera data to a remote cloud server, the system performs detection and analysis at the edge whenever possible.
-
-The platform combines:
-
-- 👁️ Real-time computer vision
-- 🤖 Edge AI
-- 🎯 Object detection and tracking
-- 📊 Risk and threat analysis
-- 🔐 Cybersecurity monitoring
-- 🚨 Event-based alerts
-- 📹 Camera monitoring
-- 📈 Security dashboard
+</p>
 
 ---
 
-## 🎯 Objectives
+## 🚀 Key Features
 
-The project aims to develop a modular surveillance platform capable of:
-
-- Detecting relevant objects in real time
-- Tracking movement across monitored areas
-- Identifying activity within defined security zones
-- Generating contextual risk information
-- Monitoring the security device and network environment
-- Providing event-based alerts
-- Processing sensitive video locally where practical
-- Reducing unnecessary cloud transmission
+- **Real-Time Object Detection:** Processes live camera frames using an AI-based object detection pipeline.
+- **Multi-Object Tracking:** Maintains object identities across consecutive frames.
+- **Restricted-Zone Detection:** Defines security regions and detects objects entering monitored areas.
+- **Spatial Security Analysis:** Evaluates object positions relative to configured security boundaries.
+- **Risk Assessment:** Converts detected security events into contextual risk information.
+- **Cybersecurity Monitoring:** Monitors host-level indicators such as CPU, memory, processes, and system health.
+- **Event-Driven Architecture:** Separates continuous video processing from meaningful security events.
+- **Alert Management:** Generates structured alerts with severity, object, zone, confidence, and timestamp information.
+- **Event Logging:** Maintains structured security-event records for future analysis.
+- **Edge-First Processing:** Supports local processing to reduce unnecessary transmission of sensitive camera data.
+- **Modular Architecture:** Separates detection, tracking, risk analysis, cybersecurity, alerting, and logging into independent components.
+- **Edge Deployment Ready:** Architecture can be extended toward Raspberry Pi, Jetson, FPGA, NPU, or other edge platforms.
 
 ---
 
-# 🧠 System Architecture
+## 🧠 System Architecture
 
 ```text
-                    CAMERA INPUT
-                         │
-                         ▼
-                ┌─────────────────┐
-                │ Image Processing│
-                │    / OpenCV     │
-                └────────┬────────┘
-                         │
-                         ▼
-                ┌─────────────────┐
-                │ Object Detection│
-                │      Model      │
-                └────────┬────────┘
-                         │
-                         ▼
-                ┌─────────────────┐
-                │ Object Tracking │
-                └────────┬────────┘
-                         │
-             ┌───────────┴───────────┐
-             ▼                       ▼
-     ┌─────────────────┐     ┌─────────────────┐
-     │ Risk / Threat   │     │ Cybersecurity   │
-     │ Analysis Engine │     │ Monitor         │
-     └────────┬────────┘     └────────┬────────┘
-              │                       │
-              └───────────┬───────────┘
-                          ▼
-                 ┌─────────────────┐
-                 │ Decision / Event│
-                 │     Engine      │
-                 └────────┬────────┘
-                          │
-              ┌───────────┴───────────┐
-              ▼                       ▼
-       ┌──────────────┐        ┌──────────────┐
-       │ Alert System │        │   Dashboard  │
-       └──────────────┘        └──────────────┘
+                         CAMERA INPUT
+                              │
+                              ▼
+                    ┌───────────────────┐
+                    │   Frame Capture   │
+                    │      OpenCV       │
+                    └─────────┬─────────┘
+                              │
+                              ▼
+                    ┌───────────────────┐
+                    │   Object Detector │
+                    │     Edge AI       │
+                    └─────────┬─────────┘
+                              │
+                              ▼
+                    ┌───────────────────┐
+                    │  Object Tracker   │
+                    │ Persistent IDs     │
+                    └─────────┬─────────┘
+                              │
+                 ┌────────────┴────────────┐
+                 │                         │
+                 ▼                         ▼
+       ┌───────────────────┐     ┌────────────────────┐
+       │ Spatial Security  │     │ Cybersecurity      │
+       │                   │     │ Monitor            │
+       │ • Zones           │     │                    │
+       │ • Intrusion       │     │ • CPU              │
+       │ • Position        │     │ • Memory           │
+       │ • Dwell Time      │     │ • Processes        │
+       └─────────┬─────────┘     └──────────┬─────────┘
+                 │                          │
+                 └────────────┬─────────────┘
+                              ▼
+                    ┌───────────────────┐
+                    │    Event Engine   │
+                    └─────────┬─────────┘
+                              │
+                              ▼
+                    ┌───────────────────┐
+                    │    Risk Engine    │
+                    │                   │
+                    │ • Confidence      │
+                    │ • Context         │
+                    │ • Zone            │
+                    │ • Duration        │
+                    │ • Risk Score      │
+                    └─────────┬─────────┘
+                              │
+                              ▼
+                    ┌───────────────────┐
+                    │   Alert Manager   │
+                    └─────────┬─────────┘
+                              │
+                    ┌─────────┴─────────┐
+                    ▼                   ▼
+             ┌─────────────┐     ┌──────────────┐
+             │ Event Logger│     │  Dashboard   │
+             └─────────────┘     └──────────────┘
